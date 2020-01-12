@@ -1,9 +1,10 @@
-import React,{Component,Fragment} from 'react';
-import PropTypes from "prop-types"
+import React,{useContext} from 'react';
+import alertContext from "../../context/alert/alertContext";
 
 
-const Alert = ({alert}) => {
-
+const Alert = () => {
+  const AlertContext = useContext(alertContext);
+  const {alert} = AlertContext;
   return (
 
       alert !== null && (
@@ -15,7 +16,7 @@ const Alert = ({alert}) => {
   );
 
 
-}
+};
 
 
 

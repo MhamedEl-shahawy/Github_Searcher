@@ -24,21 +24,43 @@ import {SET_LOADING,SEARCH_USERS,GET_USERS,CLEAR_USERS,GET_REPOS,SET_ALERT,REMOV
     });
     
 }
-  // get users
-  
-  // get repos
-  
-  // clear user
-  
+  // get github user
+const getUser = async (username) => {
+    setLoading();
+    const res = await axios.get(`https://api.github.com/users/${username}?client_id=d5d891460fa2eb86b5e7
+        &client_secret=262df3ebed0cdbd350af482511b1bd5685316de6
+       `);
+       dispath({
+        type:GET_USERS,
+        payload:res.data
+       })
+}
+//get Users Repos
+const getUserRepos = async (username) => {
+     setLoading();
+    const res = await axios.get(`https://api.github.com/users/${username}/repos?per_page=10&sort=created:asc&client_id=d5d891460fa2eb86b5e7
+        &client_secret=262df3ebed0cdbd350af482511b1bd5685316de6
+       `);
+     dispath({
+        type:GET_REPOS,
+        payload:res.data
+       })
+}
+
+  // clear users 
+   const clearUsers = ()=> dispath({type:CLEAR_USERS});
   // set laoding
    const setLoading = ()=> dispath({type:SET_LOADING});
+
   return <githubContext.Provider value={{
      users:state.users,
      user:state.user,
      repos:state.repos,
      loading:state.loading,
-     searchUsers
-
+     searchUsers,
+     clearUsers,
+     getUser,
+     GET_REPOS
   }}>
           
            {props.children}

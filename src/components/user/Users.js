@@ -1,14 +1,18 @@
-import React,{useEffect,Fragment} from 'react';
-import PropTypes from "prop-types"
+import React,{useEffect,Fragment,useContext} from 'react';
 import Spinner  from '../layout/Spinner';
 import {Link} from "react-router-dom";
 import Repos from "../repos/Repos";
+import GithubContext from "../../context/github/githubContext";
+
 import '../../App.css';
 
 
- const Users = ({user,loading,getUser,getUserRepos,repos,match}) => {
-  
-useEffect(()=>{
+ const Users = ({match}) => {
+    const githubContext = useContext(GithubContext);
+
+   const {getUser,loading,user,getUserRepos,repos} = githubContext;
+
+ useEffect(()=>{
   getUser(match.params.login);
   getUserRepos(match.params.login);
   //eslint-disable-net-line
@@ -81,14 +85,6 @@ const {name,company,avatar_url,location,bio,blog,login,html_url,followers,follow
        </Fragment>
   
   );
-}
-
-Users.PropTypes ={
-   loading:PropTypes.bool,
-   user:PropTypes.object.isRequired,
-   getUser:PropTypes.func.isRequired,
-   getUserRepos:PropTypes.func.isRequired,
-
 }
 
 
