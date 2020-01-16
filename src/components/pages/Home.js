@@ -1,18 +1,12 @@
-import React,{Fragment} from 'react';
-import User from "../user/User";
-import Search from "../user/Search";
+import React, { Fragment } from 'react';
+import Search from '../users/Search';
+import Users from '../users/Users';
 
-
-const Home = () =>(
- <Fragment> 
-     <Search />
-     <User />
+const Home = () => (
+  <Fragment>
+    <Search />
+    <Users />
   </Fragment>
-)
-
-
-
-
-
+);
 
 export default Home;
